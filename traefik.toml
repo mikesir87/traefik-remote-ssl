@@ -1,0 +1,18 @@
+defaultEntryPoints = ["http", "https"]
+insecureSkipVerify = true
+
+[docker]
+watch = true
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+    [[entryPoints.https.tls.certificates]]
+      certFile = "/etc/local-ssl/cert/fullchain.pem"
+      keyFile = "/etc/local-ssl/cert/privkey.pem"
+
